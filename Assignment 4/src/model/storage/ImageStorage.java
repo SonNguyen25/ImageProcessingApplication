@@ -3,7 +3,7 @@ package model.storage;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.image.ImageModel;
+import model.ImageModel;
 
 /**
  * The class that implements the ImageLibrary model.
@@ -38,6 +38,13 @@ public class ImageStorage implements ImageLibrary {
   @Override
   public void remove(String key, ImageModel model) {
     this.storage.remove(key, model);
+  }
+
+  @Override
+  public ImageModel contain(String name) {
+    ImageModel copy;
+    copy = this.storage.getOrDefault(name, null);
+    return copy;
   }
 
 

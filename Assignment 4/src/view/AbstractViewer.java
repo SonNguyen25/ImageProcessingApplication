@@ -3,38 +3,54 @@ package view;
 import java.awt.*;
 import java.io.IOException;
 
+import model.ImageModel;
+import model.Pixel.Pixel;
+import model.storage.ImageLibrary;
+
 public abstract class AbstractViewer implements ImageView{
-  private final ImageModel model;
+  private ImageLibrary library;
   Appendable appendable;
-  public AbstractViewer(ImageModel model, Appendable appendable) {
-    if (model == null || appendable == null) {
+  public AbstractViewer(ImageLibrary library, Appendable appendable) {
+    if (library == null || appendable == null) {
       throw new IllegalStateException("The provide model is null.");
     }
-    this.model = model;
+    this.library = library;
     this.appendable = appendable;
   }
 
-  public AbstractViewer(ImageModel model) {
-    this(model, System.out);
+  public AbstractViewer(ImageLibrary library) {
+    this(library, System.out);
   }
 
   @Override
-  public String toString() {
-    String outModel = "P3\n" + model.getWidth() + " " + model.getHeight() + " " +
-            "\n" + "255\n";
-    Pixel[][] copy = model.getCopy();
-    for (int i=0; i< copy.length;i++) {
-      for (int k=0; k< copy[i].length;k++) {
-        if (k == copy[i].length - 1) {
-          outModel += copy[i][k][0] + " " + copy[i][k][1] + " " + copy[i][k][2];
-        } else {
-          outModel += copy[i][k][0] + " " + copy[i][k][1] + " " + copy[i][k][2]
-                  + " ";
-        }
-      }
-      outModel += System.lineSeparator();
+  public String toString(String fileName) {
+    ImageModel model = library.contain(fileName);
+
+    if (model == null) {
+      throw new IllegalStateException();
     }
-    return outModel;
+    StringBuilder outModel = new StringBuilder("P3\n" + model.getWidth() + " " + model.getHeight() + " " +
+            "\n" + "255\n");
+
+    Pixel[][] copys = model.getCopy();
+
+
+    for (int i=0; i< copys.length;i++) {
+      StringBuilder oneLine = new StringBuilder("");
+      for (int k=0; k< copys[i].length;k++) {
+        if (k == copys[i].length - 1) {
+          oneLine.append(copys[i][k].getColor().get(0) + " "
+                  + copys[i][k].getColor().get(1) + " "
+                  + copys[i][k].getColor().get(2)) ;
+        } else {
+          oneLine.append(copys[i][k].getColor().get(0) + " " + copys[i][k].getColor().get(1)+ " "
+                  + copys[i][k].getColor().get(2) + " ");
+        }
+
+      }
+      outModel.append(oneLine + System.lineSeparator());
+    }
+    return outModel.toString();
   }
 
   @Override

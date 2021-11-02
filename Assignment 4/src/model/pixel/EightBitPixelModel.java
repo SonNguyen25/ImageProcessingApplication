@@ -1,6 +1,8 @@
-package model.pixel;
+package model.Pixel;
 
 import java.util.List;
+
+import model.Pixel.AbstractPixelModel;
 
 /**
  * The class that extends the AbstractPixelModel abstract class.

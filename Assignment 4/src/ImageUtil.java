@@ -72,3 +72,4 @@ public class ImageUtil {
     ImageUtil.readPPM(filename);
   }
 }
+

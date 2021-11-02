@@ -4,7 +4,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import model.PPMModel;
+import model.Pixel.EightBitPixelModel;
+import model.Pixel.Pixel;
 
 public abstract class AbstractRGBLoader implements Loader{
   private String in;
@@ -17,14 +22,14 @@ public abstract class AbstractRGBLoader implements Loader{
   }
 
   @Override
-  public Pixel[][] load() {
+  public PPMModel load() throws IllegalStateException{
 
     Scanner scanner = null;
     File file = new File(this.in);
     try {
       scanner = new Scanner(new FileInputStream(file));
     } catch (FileNotFoundException e) {
-      System.out.println("File "+ file + " not found!");
+      throw new IllegalStateException("File "+ file + " not found!");
     }
 
     StringBuilder builder = new StringBuilder();
@@ -47,16 +52,16 @@ public abstract class AbstractRGBLoader implements Loader{
     int width = scanner.nextInt();
     int height = scanner.nextInt();
     int maxValue = scanner.nextInt();
-    Pixel[][] imageBoard = new Pixel[width][height];
+    Pixel[][] imageBoard = new Pixel[height][width];
 
-    for (int i=0;i<height;i++) {
-      for (int j=0;j<width;j++) {
+    for (int i = 0; i < imageBoard.length; i++) {
+      for (int j = 0; j < imageBoard[i].length; j++) {
         int r = scanner.nextInt();
         int g = scanner.nextInt();
         int b = scanner.nextInt();
-        Pixel[i][j] = new int[]{r,g,b};
+        imageBoard[i][j] = new EightBitPixelModel(Arrays.asList(r,g,b));
       }
     }
-    return imageBoard;
+    return new PPMModel(height, width, imageBoard);
   }
 }

@@ -2,6 +2,9 @@ package command;
 
 import java.util.HashMap;
 
+import model.ImageModel;
+import model.storage.ImageLibrary;
+
 public class FlipVertical implements ImageCommand{
   String fileNameIn;
   String fileNameOut;
@@ -12,12 +15,11 @@ public class FlipVertical implements ImageCommand{
   }
 
   @Override
-  public void go(HashMap<String, ImageModel> library) {
-    ImageModel model = library.getOrDefault(fileNameIn, null);
+  public void go(ImageLibrary library) throws IllegalStateException{
+    ImageModel model = library.contain(fileNameIn);
     if (model == null) {
       throw new IllegalStateException("Cannot find immage");
     }
-
     model.flip("vertical");
     library.put(this.fileNameOut, model);
   }

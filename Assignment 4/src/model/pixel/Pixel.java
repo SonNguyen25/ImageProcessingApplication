@@ -1,4 +1,4 @@
-package model.pixel;
+package model.Pixel;
 
 import java.util.List;
 

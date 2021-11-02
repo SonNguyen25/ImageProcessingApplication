@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.io.IOException;
 import java.lang.invoke.StringConcatException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,19 +15,23 @@ import command.FlipVertical;
 import command.ImageCommand;
 import command.PPMLoad;
 import command.Save;
+import command.ValueComponent;
+import model.ImageModel;
+import model.storage.ImageLibrary;
+import model.storage.ImageStorage;
 import view.ImageView;
 
 public class ImageControllerImpl implements ImageController{
-  private ImageMode model;
+  private ImageLibrary library;
   private ImageView view;
   private Readable in =null;
 
-  public ImageControllerImpl(ImageMode model, ImageView view, Readable in) {
+  public ImageControllerImpl(ImageLibrary library, ImageView view, Readable in) {
     try {
-      if (model == null || view == null || in == null) {
+      if (library == null || view == null || in == null) {
         throw new IllegalStateException("Null input.");
       }
-      this.model = model;
+      this.library = library;
       this.view = view;
       this.in = in;
     } catch (IllegalStateException e) {
@@ -37,6 +42,7 @@ public class ImageControllerImpl implements ImageController{
 
   @Override
   public void process() throws IllegalStateException {
+    try {
     Scanner scan = new Scanner(this.in);
     Stack<ImageCommand> commands = new Stack<>();
 
@@ -45,10 +51,22 @@ public class ImageControllerImpl implements ImageController{
     knownCommands.put("brighten", (Scanner s) -> {return new Brighten(s.nextInt(),
             s.next(), s.next());});
     knownCommands.put("save", (Scanner s) -> {return new Save(s.next(), s.next());});
-    knownCommands.put("horizontal-flip ", (Scanner s) -> {return
+    knownCommands.put("horizontal-flip", (Scanner s) -> {return
             new FlipHorizontal(s.next(), s.next());});
-    knownCommands.put("vertical-flip ", (Scanner s) -> {return
+    knownCommands.put("vertical-flip", (Scanner s) -> {return
             new FlipVertical(s.next(), s.next());});
+    knownCommands.put("red", (Scanner s) -> {return new ValueComponent(s.next(), s.next(),
+            "red");});
+    knownCommands.put("green", (Scanner s) -> {return new ValueComponent(s.next(), s.next(),
+            "green");});
+    knownCommands.put("blue", (Scanner s) -> {return new ValueComponent(s.next(), s.next(),
+            "blue");});
+    knownCommands.put("luma", (Scanner s) -> {return new ValueComponent(s.next(), s.next(),
+            "luma");});
+    knownCommands.put("intensity", (Scanner s) -> {return new ValueComponent(s.next(), s.next(),
+            "intensity");});
+    knownCommands.put("max", (Scanner s) -> {return new ValueComponent(s.next(), s.next(),
+            "max");});
 
     while(scan.hasNext()) {
       ImageCommand c;
@@ -56,15 +74,24 @@ public class ImageControllerImpl implements ImageController{
       if (in.equalsIgnoreCase("q") || in.equalsIgnoreCase("quit")) {
         return;
       }
-
+      try {
       Function<Scanner, ImageCommand> cmd = knownCommands.getOrDefault(in, null);
       if (cmd == null) {
         throw new IllegalStateException();
       } else {
-        c = cmd.apply(scan);
-        commands.add(c);
-        c.go(model.getLibrary());
-      }
+          c = cmd.apply(scan);
+          commands.add(c);
+          c.go(library);
+          this.view.renderMessage("Action Completed!");
+
+      } } catch (IllegalStateException e) {
+        this.view.renderMessage("Action failed");
+        }
+
+
     }
+    } catch (IOException e) {
+      throw new IllegalStateException("The appendable writes fail");
     }
   }
+}

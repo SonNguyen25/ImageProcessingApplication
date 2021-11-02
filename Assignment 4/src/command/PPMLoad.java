@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 import command.Loader.Loader;
 import command.Loader.PPMloader;
+import model.ImageModel;
+import model.PPMModel;
+import model.storage.ImageLibrary;
 
 public class PPMLoad implements ImageCommand{
   String path;
@@ -16,9 +19,14 @@ public class PPMLoad implements ImageCommand{
   }
 
   @Override
-  public void go(HashMap<String, ImageModel> library) {
+  public void go(ImageLibrary library) throws IllegalStateException{
     Loader image = new PPMloader(this.path);
-    ImageModel model = new ImageModel(image.load());
-    library.put(this.fileName, model);
+    ImageModel model = null;
+    try {
+      model = image.load();
+      library.put(this.fileName, model);
+    } catch (IllegalStateException e) {
+      throw new IllegalStateException("Loading fails: Incorrect Path！");
+    }
   }
 }

@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 public interface ImageView {
-String toString();
+  String toString(String fileName);
 
-void renderMessage(String message) throws IOException;
+  void renderMessage(String message) throws IOException;
 }

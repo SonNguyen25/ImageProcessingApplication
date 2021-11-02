@@ -1,6 +1,6 @@
 package model.storage;
 
-import model.image.ImageModel;
+import model.ImageModel;
 
 /**
  * This interface represents the operations offered by an image storage.
@@ -21,4 +21,6 @@ public interface ImageLibrary {
    * @param model represents the model of the image.
    */
   void remove(String key, ImageModel model);
+
+  public ImageModel contain(String name);
 }

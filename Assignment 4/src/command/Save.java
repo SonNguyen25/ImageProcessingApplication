@@ -9,26 +9,28 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import model.ImageModel;
+import model.storage.ImageLibrary;
 import view.PPMView;
 
 public class Save implements ImageCommand{
   String savingPath;
   String fileNameIn;
-  public Save(String savingPath, String fileName) {
+  public Save(String savingPath, String fileNameIn) {
     this.savingPath = savingPath;
-    this.fileNameIn = fileName;
+    this.fileNameIn = fileNameIn;
   }
 
   @Override
-  public void go(HashMap<String, ImageModel> library) {
-    ImageModel model = library.getOrDefault(fileNameIn, null);
+  public void go(ImageLibrary library) throws IllegalStateException{
+    ImageModel model = library.contain(fileNameIn);
     if (model == null) {
       throw new IllegalStateException("Cannot find immage");
     }
     try {
       File out = new File(this.savingPath);
       FileOutputStream imageOut = new FileOutputStream(out);
-      imageOut.write(new PPMView(model).toString().getBytes());
+      imageOut.write(new PPMView(library).toString(this.fileNameIn).getBytes());
       imageOut.flush();
       imageOut.close();
     } catch (IOException e) {
