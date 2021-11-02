@@ -1,8 +1,7 @@
 package model.Pixel;
 
+import java.util.LinkedList;
 import java.util.List;
-
-import model.Pixel.AbstractPixelModel;
 
 /**
  * The class that extends the AbstractPixelModel abstract class.
@@ -17,6 +16,19 @@ public class EightBitPixelModel extends AbstractPixelModel {
    */
   public EightBitPixelModel(List<Integer> rgb) {
     super(rgb);
+  }
+
+  @Override
+  public Pixel copy() {
+    List<Integer> rgbCopy;
+    rgbCopy = super.getColor();
+    List<Integer> rgbRealCopy = new LinkedList<>();
+    for (int i = 0; i < rgbCopy.size(); i++) {
+      rgbRealCopy.add(rgbCopy.get(i));
+    }
+    Pixel copy;
+    copy = new EightBitPixelModel(rgbRealCopy);
+    return copy;
   }
 
 }

@@ -21,6 +21,8 @@ public class ValueComponent implements ImageCommand{
         }
         model.greyScale(way);
         library.put(this.nameOutput, model);
+        System.out.println(library.contain("koala-red").getCopy()[0][0].getColor().get(0));
+        System.out.println(library.contain("koala").getCopy()[0][0].getColor().get(0));
     }
 }
 

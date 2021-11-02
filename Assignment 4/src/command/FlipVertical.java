@@ -1,7 +1,5 @@
 package command;
 
-import java.util.HashMap;
-
 import model.ImageModel;
 import model.storage.ImageLibrary;
 

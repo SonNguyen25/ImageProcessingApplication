@@ -2,7 +2,6 @@ package controller;
 
 
 import java.io.IOException;
-import java.lang.invoke.StringConcatException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,12 +12,10 @@ import command.Brighten;
 import command.FlipHorizontal;
 import command.FlipVertical;
 import command.ImageCommand;
-import command.PPMLoad;
+import command.Load;
 import command.Save;
 import command.ValueComponent;
-import model.ImageModel;
 import model.storage.ImageLibrary;
-import model.storage.ImageStorage;
 import view.ImageView;
 
 public class ImageControllerImpl implements ImageController{
@@ -47,7 +44,7 @@ public class ImageControllerImpl implements ImageController{
     Stack<ImageCommand> commands = new Stack<>();
 
     Map<String, Function<Scanner, ImageCommand>> knownCommands = new HashMap<>();
-    knownCommands.put("load", (Scanner s) -> {return new PPMLoad(s.next(), s.next());});
+    knownCommands.put("load", (Scanner s) -> {return new Load(s.next(), s.next());});
     knownCommands.put("brighten", (Scanner s) -> {return new Brighten(s.nextInt(),
             s.next(), s.next());});
     knownCommands.put("save", (Scanner s) -> {return new Save(s.next(), s.next());});

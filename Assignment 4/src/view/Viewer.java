@@ -1,16 +1,15 @@
 package view;
 
-import java.awt.*;
 import java.io.IOException;
 
 import model.ImageModel;
 import model.Pixel.Pixel;
 import model.storage.ImageLibrary;
 
-public abstract class AbstractViewer implements ImageView{
+public class Viewer implements ImageView{
   private ImageLibrary library;
   Appendable appendable;
-  public AbstractViewer(ImageLibrary library, Appendable appendable) {
+  public Viewer(ImageLibrary library, Appendable appendable) {
     if (library == null || appendable == null) {
       throw new IllegalStateException("The provide model is null.");
     }
@@ -18,7 +17,7 @@ public abstract class AbstractViewer implements ImageView{
     this.appendable = appendable;
   }
 
-  public AbstractViewer(ImageLibrary library) {
+  public Viewer(ImageLibrary library) {
     this(library, System.out);
   }
 
@@ -38,15 +37,12 @@ public abstract class AbstractViewer implements ImageView{
     for (int i=0; i< copys.length;i++) {
       StringBuilder oneLine = new StringBuilder("");
       for (int k=0; k< copys[i].length;k++) {
-        if (k == copys[i].length - 1) {
-          oneLine.append(copys[i][k].getColor().get(0) + " "
-                  + copys[i][k].getColor().get(1) + " "
-                  + copys[i][k].getColor().get(2)) ;
-        } else {
-          oneLine.append(copys[i][k].getColor().get(0) + " " + copys[i][k].getColor().get(1)+ " "
-                  + copys[i][k].getColor().get(2) + " ");
-        }
-
+          for (int j = 0; j < copys[i][k].getColor().size(); j++ ) {
+            if (k == copys[i].length - 1 && j == copys[i][k].getColor().size() - 1) {
+              oneLine.append(copys[i][k].getColor().get(j));
+            }
+            oneLine.append(copys[i][k].getColor().get(j) + " ");
+          }
       }
       outModel.append(oneLine + System.lineSeparator());
     }

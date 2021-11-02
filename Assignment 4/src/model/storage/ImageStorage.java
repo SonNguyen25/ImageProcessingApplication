@@ -43,8 +43,13 @@ public class ImageStorage implements ImageLibrary {
   @Override
   public ImageModel contain(String name) {
     ImageModel copy;
+    ImageModel resultCopy;
     copy = this.storage.getOrDefault(name, null);
-    return copy;
+    if (copy == null) {
+      throw new IllegalStateException();
+    }
+    resultCopy = copy.clone();
+    return resultCopy;
   }
 
 

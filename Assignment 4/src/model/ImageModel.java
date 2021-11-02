@@ -38,4 +38,6 @@ public interface ImageModel {
   int getHeight();
 
   Pixel[][] getCopy();
+
+  ImageModel clone();
 }

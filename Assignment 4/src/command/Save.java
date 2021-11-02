@@ -1,17 +1,12 @@
 package command;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-
-import javax.imageio.ImageIO;
 
 import model.ImageModel;
 import model.storage.ImageLibrary;
-import view.PPMView;
+import view.Viewer;
 
 public class Save implements ImageCommand{
   String savingPath;
@@ -30,7 +25,7 @@ public class Save implements ImageCommand{
     try {
       File out = new File(this.savingPath);
       FileOutputStream imageOut = new FileOutputStream(out);
-      imageOut.write(new PPMView(library).toString(this.fileNameIn).getBytes());
+      imageOut.write(new Viewer(library).toString(this.fileNameIn).getBytes());
       imageOut.flush();
       imageOut.close();
     } catch (IOException e) {

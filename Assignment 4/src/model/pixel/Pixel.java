@@ -37,4 +37,6 @@ public interface Pixel {
    * the red component, the blue component, or the green component.
    */
   void setRGB(String type);
+
+  Pixel copy();
 }

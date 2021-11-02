@@ -79,8 +79,8 @@ public abstract class AbstractImageModel implements ImageModel {
     if (direction.equals("horizontal")) {
       for (int i = 0; i < this.height; i++) {
         for (int j = 0; j < this.width / 2; j++) {
-          Pixel temporary = this.pixels[i][j];
-          this.pixels[i][j] = this.pixels[i][this.width - j - 1];
+          Pixel temporary = this.pixels[i][j].copy();
+          this.pixels[i][j] = this.pixels[i][this.width - j - 1].copy();
           this.pixels[i][this.width - j - 1] = temporary;
         }
       }
@@ -133,6 +133,19 @@ public abstract class AbstractImageModel implements ImageModel {
   public Pixel[][] getCopy() {
     Pixel[][] pixels = this.pixels;
     return pixels;
+  }
+
+  @Override
+  public ImageModel clone() {
+    ImageModel copy;
+    Pixel[][] pixelCopy = new Pixel[height][width];
+    for (int i = 0; i < this.pixels.length; i++ ) {
+      for (int k = 0; k < this.pixels[i].length; k++) {
+        pixelCopy[i][k] = this.pixels[i][k].copy();
+      }
+    }
+    copy = new PPMModel(height, width, pixelCopy);
+    return copy;
   }
 
 

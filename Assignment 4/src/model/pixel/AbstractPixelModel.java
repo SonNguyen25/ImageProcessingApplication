@@ -99,4 +99,7 @@ public abstract class AbstractPixelModel implements Pixel {
       }
     }
   }
+
+  @Override
+  public abstract Pixel copy() ;
 }
