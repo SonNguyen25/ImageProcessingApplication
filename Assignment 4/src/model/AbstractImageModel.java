@@ -76,18 +76,24 @@ public abstract class AbstractImageModel implements ImageModel {
    */
   @Override
   public void flip(String direction) {
-    for (int i = 0; i < this.height; i++) {
-      for (int j = 0; j < this.width / 2; j++) {
-        if (direction.equals("horizontal")) {
+    if (direction.equals("horizontal")) {
+      for (int i = 0; i < this.height; i++) {
+        for (int j = 0; j < this.width / 2; j++) {
           Pixel temporary = this.pixels[i][j];
           this.pixels[i][j] = this.pixels[i][this.width - j - 1];
           this.pixels[i][this.width - j - 1] = temporary;
-        } else if (direction.equals("vertical")) {
+        }
+      }
+    } else if (direction.equals("vertical")) {
+      for (int i = 0; i < this.height / 2; i++) {
+        for (int j = 0; j < this.width; j++) {
           Pixel temporary = this.pixels[i][j];
           this.pixels[i][j] = this.pixels[this.height - i - 1][j];
           this.pixels[this.height - i - 1][j] = temporary;
         }
       }
+    } else {
+      throw new IllegalArgumentException("Invalid direction!");
     }
   }
 

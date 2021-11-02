@@ -32,13 +32,19 @@ public abstract class AbstractRGBLoader implements Loader{
       throw new IllegalStateException("File "+ file + " not found!");
     }
 
+
     StringBuilder builder = new StringBuilder();
 
     while(scanner.hasNextLine()) {
       String s = scanner.nextLine();
-      if (s.charAt(0)!='#') {
-        builder.append(s+System.lineSeparator());
+      try {
+        if (s.charAt(0)!='#') {
+          builder.append(s+System.lineSeparator());
+        }
+      } catch (Exception e) {
+        throw new IllegalStateException();
       }
+
     }
     scanner = new Scanner(builder.toString());
 
@@ -47,7 +53,7 @@ public abstract class AbstractRGBLoader implements Loader{
     token = scanner.next();
 
     if (!token.equals("P3")) {
-      System.out.println("Invalid PPM file: plain RAW file should begin with P3");
+      throw new IllegalStateException("Invalid PPM file: plain RAW file should begin with P3");
     }
     int width = scanner.nextInt();
     int height = scanner.nextInt();
