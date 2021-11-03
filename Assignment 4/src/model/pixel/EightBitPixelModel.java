@@ -1,6 +1,6 @@
-package model.pixel;
+package model.Pixel;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +12,6 @@ public class EightBitPixelModel extends AbstractPixelModel {
 
   /**
    * A constructor taking in the structure of the pixel (its list of RGB values).
-   *
    * @param rgb represent the list of RGB values.
    */
   public EightBitPixelModel(List<Integer> rgb) {
@@ -28,7 +27,7 @@ public class EightBitPixelModel extends AbstractPixelModel {
   public Pixel copy() {
     List<Integer> rgbCopy;
     rgbCopy = super.getColor();
-    List<Integer> rgbRealCopy = new LinkedList<>();
+    List<Integer> rgbRealCopy = new ArrayList<>();
     for (int i = 0; i < rgbCopy.size(); i++) {
       rgbRealCopy.add(rgbCopy.get(i));
     }

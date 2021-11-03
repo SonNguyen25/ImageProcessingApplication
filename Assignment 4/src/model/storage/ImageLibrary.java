@@ -27,5 +27,5 @@ public interface ImageLibrary {
    * @param name represents the name of the image
    * @return the given image model stored
    */
-  ImageModel contain(String name);
+  public ImageModel contain(String name);
 }

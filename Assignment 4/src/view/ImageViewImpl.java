@@ -3,16 +3,27 @@ package view;
 import java.io.IOException;
 
 import model.image.ImageModel;
-import model.pixel.Pixel;
+import model.Pixel.Pixel;
+import model.image.PPMModel;
 import model.storage.ImageLibrary;
 
-public class ImageViewImpl implements ImageView {
+/**
+ * This is the viewer class that implements the ImageView interface. It will process different
+ * kinds of image model and make it writable or visible with possible errors outputting.
+ */
+public class ImageViewImpl implements ImageView{
   private ImageLibrary library;
   Appendable appendable;
 
+  /**
+   * This is the constructor for the view class. It allows the transformation between a model and
+   * a writable string output that represents the model.
+   * @param library The storage of images.
+   * @param appendable The output information.
+   */
   public ImageViewImpl(ImageLibrary library, Appendable appendable) {
     if (library == null || appendable == null) {
-      throw new IllegalStateException("The provide model is null.");
+      throw new IllegalArgumentException("The provide model is null.");
     }
     this.library = library;
     this.appendable = appendable;
@@ -29,11 +40,14 @@ public class ImageViewImpl implements ImageView {
     if (model == null) {
       throw new IllegalStateException();
     }
-    StringBuilder outModel = new StringBuilder("P3\n" + model.getWidth() + " " + model.getHeight() + " " +
-            "\n" + "255\n");
-
     Pixel[][] copys = model.getPixels();
 
+    StringBuilder outModel = new StringBuilder();
+
+    if (model instanceof PPMModel) {
+      outModel = new StringBuilder("P3\n" + model.getWidth() + " " + model.getHeight() + " " +
+              "\n" + "255\n");
+    }
 
     for (int i=0; i< copys.length;i++) {
       StringBuilder oneLine = new StringBuilder("");

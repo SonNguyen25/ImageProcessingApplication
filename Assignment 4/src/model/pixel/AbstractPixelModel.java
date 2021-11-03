@@ -1,4 +1,4 @@
-package model.pixel;
+package model.Pixel;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +14,6 @@ public abstract class AbstractPixelModel implements Pixel {
 
   /**
    * A constructor taking in the structure of the pixel (its list of RGB values).
-   *
    * @param rgb represent the list of RGB values.
    */
   public AbstractPixelModel(List<Integer> rgb) {
@@ -72,17 +71,13 @@ public abstract class AbstractPixelModel implements Pixel {
    */
   @Override
   public void setRGB(String type) {
-    int value = 0;
-    if (type.equals("luma")) {
-      value = this.luma();
-    } else if (type.equals("intensity")) {
-      value = this.intensity();
-    }
     for (int i = 0; i < this.rgb.size(); i++) {
-      switch (type) {
-        case "luma": //continue to the intensity case because they have the same operations.
+      switch(type) {
+        case "luma":
+          this.rgb.set(i, this.luma());
+          break;
         case "intensity":
-          this.rgb.set(i, value);
+          this.rgb.set(i, this.intensity());
           break;
         case "max":
           this.rgb.set(i, this.maxVal());
@@ -100,8 +95,7 @@ public abstract class AbstractPixelModel implements Pixel {
           this.rgb.set(i, blue);
           break;
         default:
-          throw new IllegalArgumentException("Invalid argument!");
-          //throw an Illegal Argument Exception since the argument is invalid.
+          break; //there's nothing to change for the default case since all cases are covered.
       }
     }
   }
@@ -112,5 +106,5 @@ public abstract class AbstractPixelModel implements Pixel {
    * @return the copy of the pixel.
    */
   @Override
-  public abstract Pixel copy();
+  public abstract Pixel copy() ;
 }

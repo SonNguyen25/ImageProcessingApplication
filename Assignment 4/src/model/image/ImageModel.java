@@ -1,6 +1,6 @@
 package model.image;
 
-import model.pixel.Pixel;
+import model.Pixel.Pixel;
 
 /**
  * This interface represents the operations offered by the image model.

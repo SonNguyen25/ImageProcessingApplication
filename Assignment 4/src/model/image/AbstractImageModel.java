@@ -1,6 +1,6 @@
 package model.image;
 
-import model.pixel.Pixel;
+import model.Pixel.Pixel;
 
 /**
  * This class is an abstract implementation of the ImageModel interface. This class
@@ -16,13 +16,12 @@ public abstract class AbstractImageModel implements ImageModel {
 
   /**
    * This constructor takes in the structure of the image that is used for image operations.
-   *
    * @param height represents the height of the image
-   * @param width  represents the width of the image
+   * @param width represents the width of the image
    * @param pixels represents all the pixels in the image
    */
-  public AbstractImageModel(int height, int width, int maxValue, Pixel[][] pixels) {
-    this.maxValue = maxValue;
+  public AbstractImageModel(int height, int width, Pixel[][] pixels) {
+    this.maxValue = 255;
     if (height < 0 || width < 0) {
       throw new IllegalArgumentException("Invalid dimensions of image!");
     }
@@ -36,7 +35,6 @@ public abstract class AbstractImageModel implements ImageModel {
 
   /**
    * Brighten or darken the image with the amount inputted by the user.
-   *
    * @param amount represents the amount the user want to brighten/darken the image.
    */
   @Override
@@ -53,13 +51,12 @@ public abstract class AbstractImageModel implements ImageModel {
 
   /**
    * Ensure the minimum value and maximum value of rgb doesn't go out of range.
-   *
    * @param pixels represent the 2D array of pixels.
    * @return the Pixel list after its rgb values are ensured to be in the correct range.
    */
   protected Pixel[][] ensureVal(Pixel[][] pixels) {
     for (int i = 0; i < pixels.length; i++) {
-      for (int j = 0; j < pixels[0].length; j++) {
+      for (int j = 0; j < pixels[i].length; j++) {
         for (int k = 0; k < pixels[i][j].getColor().size(); k++) {
           if (pixels[i][j].getColor().get(k) < 0) {
             pixels[i][j].getColor().set(k, 0);
@@ -74,7 +71,6 @@ public abstract class AbstractImageModel implements ImageModel {
 
   /**
    * Flip the image vertically or horizontally.
-   *
    * @param direction represents the direction of the flip, enter horizontal for horizontal flip
    *                  and vertical for vertical flip.
    */
@@ -83,8 +79,8 @@ public abstract class AbstractImageModel implements ImageModel {
     if (direction.equals("horizontal")) {
       for (int i = 0; i < this.height; i++) {
         for (int j = 0; j < this.width / 2; j++) {
-          Pixel temporary = this.pixels[i][j];
-          this.pixels[i][j] = this.pixels[i][this.width - j - 1];
+          Pixel temporary = this.pixels[i][j].copy();
+          this.pixels[i][j] = this.pixels[i][this.width - j - 1].copy();
           this.pixels[i][this.width - j - 1] = temporary;
         }
       }
@@ -103,7 +99,6 @@ public abstract class AbstractImageModel implements ImageModel {
 
   /**
    * Convert the image colors into greyscale.
-   *
    * @param ways represents different way to turn the image into greyscale, enter:
    *             "luma" to convert it using the luma value,
    *             "intensity" to convert it using the intensity value,
@@ -116,9 +111,9 @@ public abstract class AbstractImageModel implements ImageModel {
   public void greyScale(String ways) {
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
-        this.pixels[i][j].setRGB(ways);
+          this.pixels[i][j].setRGB(ways);
+        }
       }
-    }
     ensureVal(this.pixels);
   }
 
@@ -151,8 +146,8 @@ public abstract class AbstractImageModel implements ImageModel {
    */
   @Override
   public Pixel[][] getPixels() {
-    Pixel[][] pixelCopy = this.pixels;
-    return pixelCopy;
+    Pixel[][] pixels = this.pixels;
+    return pixels;
   }
 
   /**
@@ -161,14 +156,15 @@ public abstract class AbstractImageModel implements ImageModel {
   @Override
   public ImageModel clone() {
     ImageModel copy;
-    Pixel[][] pixelCopy = new Pixel[this.height][this.width];
-    for (int i = 0; i < this.pixels.length; i++) {
+    Pixel[][] pixelCopy = new Pixel[height][width];
+    for (int i = 0; i < this.pixels.length; i++ ) {
       for (int k = 0; k < this.pixels[i].length; k++) {
         pixelCopy[i][k] = this.pixels[i][k].copy();
       }
     }
-    copy = new PPMModel(height, width, this.maxValue, pixelCopy);
+    copy = new PPMModel(height, width, pixelCopy);
     return copy;
   }
+
 
 }

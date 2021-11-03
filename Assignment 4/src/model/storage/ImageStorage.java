@@ -22,8 +22,7 @@ public class ImageStorage implements ImageLibrary {
 
   /**
    * Put an image into the hashmap to store it.
-   *
-   * @param key   represents the name of the image.
+   * @param key represents the name of the image.
    * @param model represents the model of the image.
    */
   @Override
@@ -33,8 +32,7 @@ public class ImageStorage implements ImageLibrary {
 
   /**
    * Remove an image from the storage.
-   *
-   * @param key   represents the name of the image.
+   * @param key represents the name of the image.
    * @param model represents the model of the image.
    */
   @Override
@@ -59,5 +57,6 @@ public class ImageStorage implements ImageLibrary {
     resultCopy = copy.clone();
     return resultCopy;
   }
+
 
 }

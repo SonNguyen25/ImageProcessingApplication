@@ -1,6 +1,6 @@
 package model.image;
 
-import model.pixel.Pixel;
+import model.Pixel.Pixel;
 
 /**
  * The class that extends the AbstractImageModel abstract class.
@@ -17,19 +17,8 @@ public class PPMModel extends AbstractImageModel {
    * @param width represents the width of the image
    * @param pixels represents all the pixels in the image
    */
-  public PPMModel(int height, int width, int maxValue, Pixel[][] pixels) {
-    super(height, width, maxValue, pixels);
+  public PPMModel(int height, int width, Pixel[][] pixels) {
+    super(height, width, pixels);
   }
-
-
-
-
-
-
-
-
-
-
-
 
 }
