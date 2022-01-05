@@ -2,7 +2,7 @@
 
 ## Overview of the Program: 
 
-This program allows the user to process different image types with some basic commands. The currently supported image type is .ppm. And the program allows the user to change the brightness, flipping vertically or horizontally and changing to greyscale different component ways. 
+This program allows the user to process different image types with some basic commands. The currently supported image type is ppm, jpg, jpeg, png, bmp. And the program allows the user to change the brightness, flipping vertically or horizontally, downscaling, blur (Gaussian blur), sharpen, speia and greyscale (changing to greyscale different component ways). Partial Image Manipulation is also supported. 
 
 ## Program Structure 
 
