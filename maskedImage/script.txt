@@ -1,0 +1,22 @@
+load C:\Users\admin\OneDrive\Public\maskedImage\ood.png ood
+load C:\Users\admin\OneDrive\Public\maskedImage\mask.png mask
+blur ood mask oodBlur
+sharpen ood mask oodSharp
+sepia ood mask oodSepia
+greyscale ood mask oodGreyscale
+intensity-component ood mask oodIntensity
+value-component ood mask oodMax
+luma-component ood mask oodLuma
+red-component ood mask oodRed
+green-component ood mask oodGreen
+blue-component ood mask oodBlue
+save C:\Users\admin\OneDrive\Public\maskedImage\oodBlur.png oodBlur
+save C:\Users\admin\OneDrive\Public\maskedImage\oodSharp.png oodSharp
+save C:\Users\admin\OneDrive\Public\maskedImage\oodSepia.png oodSepia
+save C:\Users\admin\OneDrive\Public\maskedImage\oodGreyscale.png oodGreyscale
+save C:\Users\admin\OneDrive\Public\maskedImage\oodIntensity.jpg oodIntensity
+save C:\Users\admin\OneDrive\Public\maskedImage\oodMax.bmp oodMax
+save C:\Users\admin\OneDrive\Public\maskedImage\oodLuma.jpeg oodLuma
+save C:\Users\admin\OneDrive\Public\maskedImage\oodRed.jpg oodRed
+save C:\Users\admin\OneDrive\Public\maskedImage\oodGreen.bmp oodGreen
+save C:\Users\admin\OneDrive\Public\maskedImage\oodBlue.png oodBlue

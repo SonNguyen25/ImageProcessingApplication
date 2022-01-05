@@ -1,0 +1,10 @@
+load C:\Users\admin\OneDrive\Public\downscale\ood.png ood
+
+downscale 10 10 ood oodTen
+downscale 100 100 ood oodHundred
+downscale 100 25 ood oodHundredTwentyFive
+downscale 45 276 ood oodFortyFiveTwoSevenSix
+save C:\Users\admin\OneDrive\Public\downscale\oodTen.bmp oodTen
+save C:\Users\admin\OneDrive\Public\downscale\oodHundred.png oodHundred
+save C:\Users\admin\OneDrive\Public\downscale\oodHundredTwentyFive.jpg oodHundredTwentyFive
+save C:\Users\admin\OneDrive\Public\downscale\oodFortyFiveTwoSevenSix.png oodFortyFiveTwoSevenSix
