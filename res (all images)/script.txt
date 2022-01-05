@@ -1,0 +1,51 @@
+load C:\Users\admin\OneDrive\Public\Results\ood.png ood
+load C:\Users\admin\OneDrive\Public\Results\mask.png mask
+blur ood mask oodBlur
+sharpen ood mask oodSharp
+sepia ood mask oodSepia
+greyscale ood mask oodGreyscale
+intensity-component ood mask oodIntensity
+value-component ood mask oodMax
+luma-component ood mask oodLuma
+red-component ood mask oodRed
+green-component ood mask oodGreen
+blue-component ood mask oodBlue
+downscale 10 10 ood oodTen
+downscale 100 100 ood oodHundred
+downscale 100 25 ood oodHundredTwentyFive
+downscale 45 276 ood oodFortyFiveTwoSevenSix
+save C:\Users\admin\OneDrive\Public\Results\oodTen.bmp oodTen
+save C:\Users\admin\OneDrive\Public\Results\oodHundred.png oodHundred
+save C:\Users\admin\OneDrive\Public\Results\oodHundredTwentyFive.jpg oodHundredTwentyFive
+save C:\Users\admin\OneDrive\Public\Results\oodFortyFiveTwoSevenSix.png oodFortyFiveTwoSevenSix
+save C:\Users\admin\OneDrive\Public\Results\oodBlurMask.png oodBlur
+save C:\Users\admin\OneDrive\Public\Results\oodSharpMask.png oodSharp
+save C:\Users\admin\OneDrive\Public\Results\oodSepiaMask.png oodSepia
+save C:\Users\admin\OneDrive\Public\Results\oodGreyscaleMask.png oodGreyscale
+save C:\Users\admin\OneDrive\Public\Results\oodIntensityMask.jpg oodIntensity
+save C:\Users\admin\OneDrive\Public\Results\oodMaxMask.bmp oodMax
+save C:\Users\admin\OneDrive\Public\Results\oodLumaMask.jpeg oodLuma
+save C:\Users\admin\OneDrive\Public\Results\oodRedMask.jpg oodRed
+save C:\Users\admin\OneDrive\Public\Results\oodGreenMask.bmp oodGreen
+save C:\Users\admin\OneDrive\Public\Results\oodBlueMask.png oodBlue
+brighten 30 ood ood-brighter 
+red-component ood ood-red
+blue-component ood-brighter ood-b-blue
+green-component ood-red ood-green
+luma-component ood ood-luma
+value-component ood ood-max
+intensity-component ood ood-intensity 
+horizontal-flip ood ood-h
+vertical-flip ood ood-v
+horizontal-flip ood-b-blue ood-b-blue-h
+greyscale ood-b-blue-h ood-b-blue-h-gs
+sepia ood-b-blue-h-gs ood-b-blue-h-gs-sepia
+blur ood-b-blue-h-gs-sepia ood-b-blue-h-gs-sepia-blur
+sharpen ood-b-blue-h-gs-sepia-blur ood-b-blue-h-gs-sepia-blur-sharp
+save C:\Users\admin\OneDrive\Public\Results\oodmulti.png ood-b-blue-h-gs-sepia-blur-sharp
+save C:\Users\admin\OneDrive\Public\Results\oodmulti.jpg ood-b-blue-h
+save C:\Users\admin\OneDrive\Public\Results\oodred.bmp ood-red
+save C:\Users\admin\OneDrive\Public\Results\oodluma.ppm ood-luma
+save C:\Users\admin\OneDrive\Public\Results\ood.ppm ood
+save C:\Users\admin\OneDrive\Public\Results\ood.bmp ood
+save C:\Users\admin\OneDrive\Public\Results\ood.jpg ood
