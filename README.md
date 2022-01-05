@@ -258,7 +258,7 @@ Error handled:
 
 
 
-## Important Updates for ImageProces V2.0 
+## Important Updates for ImageProcess
 
 ### 1. More functions added 
 
