@@ -15,9 +15,9 @@ This is the main class that we can run this program in two different ways.
 ```
 1. Using a script by calling -file / -f
 
-2. Using terminal command lines by leaving it blank. (Strar the GUI)
+2. Using terminal command lines by leaving it blank. (Start the GUI)
 
-3. Using a text-based input by callig -text
+3. Using a text-based input by calling -text
 ```
 
  The imageprocess takes in a model, view and controller.
